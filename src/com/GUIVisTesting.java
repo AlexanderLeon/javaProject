@@ -61,9 +61,9 @@ class GUIVisTesting
         };
         jfrm.setContentPane(contentPane);
         jfrm.setLayout(null);
-        JButton jbtn = new JButton("Next step");
-        jbtn.setLocation(200, 500);
-        jbtn.setSize(100, 50);
+        JButton jbtn = new JButton("Следующий шаг");
+        jbtn.setLocation(150, 500);
+        jbtn.setSize(150, 50);
         jbtn.setLocation(200, 500);
 
         final int[] a = { 1, 2, 3 };
@@ -72,14 +72,14 @@ class GUIVisTesting
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                a[5] = 1;
+                a[0] = 1;
             }
         });
         jfrm.add(jbtn);
-        JLabel jlab = new JLabel("Result:");
-        jlab.setFont(new Font("Arial", Font.PLAIN, 30));
-        jlab.setLocation(340, 000);
-        jlab.setSize(150, 30);
+        JLabel jlab = new JLabel("Заполнение наименьшим количеством прямоугольников: ");
+        jlab.setFont(new Font("Arial", Font.PLAIN, 20));
+        jlab.setLocation(000, 000);
+        jlab.setSize(550, 30);
         jfrm.add(jlab);
 
         /*field1[1][1]='$';
