@@ -34,7 +34,7 @@ public class FillingWithRectanglesAlgorithm
 			outfile << " - Source" << endl << endl;
 			infile.clear();
 			infile.seekg(0, ios::beg);
-			cout << "CheckeredPlane algorythm:" << endl;
+			cout << "CheckeredPlane algorithm:" << endl;
 
 			starter(infile, outfile);
 
