@@ -19,8 +19,7 @@ class GUIVisTesting
     	     */
         }
         final char[][] field1 = new char[5][5];
-        final int width1=100, height1=100;
-        boolean nextStep=false;
+        final int width1=3, height1=3;
         for(int i=0;i<5;i++)
         {
             field1[i][0]='#';
@@ -52,10 +51,24 @@ class GUIVisTesting
                 else
                     sizeOfFieldElement=sizeOfFieldElement2;
                 g2.drawRect(10, 40, sizeOfFieldElement*width1, sizeOfFieldElement*height1);
+                for(int i=1; i<=width1; i++)
+                {
+                    for(int j=1; j<=height1; j++)
+                        if(field1[i][j]=='#')
+                        {
+                            int w=0;
+                            for(int k=j; field1[i][k]=='#'; k++)
+                                w++;
+                            int h=0;
+                            for(int k=i; field1[k][j]=='#'; k++)
+                                h++;
+                            g2.fillRect((i-1)*sizeOfFieldElement+10, (j-1)*sizeOfFieldElement+40, w*sizeOfFieldElement, h*sizeOfFieldElement);
+                        }
+                }
                 /*g2.setColor(Color.red);
                 g2.fillRect(20, 80, 100, 100);
                 g2.setColor(Color.black);
-                g2.drawRect(20, 80, 100, 100);
+
                 g2.setColor(Color.red);
                 g2.fillRect(120, 80, 100, 100);
                 g2.setColor(Color.black);
@@ -68,14 +81,12 @@ class GUIVisTesting
         jbtn.setLocation(150, 500);
         jbtn.setSize(150, 50);
         jbtn.setLocation(200, 500);
-
-        final int[] a = { 1, 2, 3 };
-
-        jbtn.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                a[0] = 1;
+        final boolean[]nextStep={false};
+        jbtn.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                nextStep[0] = true;
             }
         });
         jfrm.add(jbtn);
@@ -83,8 +94,11 @@ class GUIVisTesting
         jlab.setFont(new Font("Arial", Font.PLAIN, 20));
         jlab.setLocation(000, 000);
         jlab.setSize(550, 30);
+        jlab.setVisible(false);
         jfrm.add(jlab);
-
+        while(!nextStep[0])
+        {
+        }
         /*field1[1][1]='$';
         field1[2][1]='$';
         field1[3][1]='$';
