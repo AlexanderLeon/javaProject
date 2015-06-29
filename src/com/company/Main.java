@@ -1,8 +1,14 @@
 package com.company;
 
-public class Main {
+import javax.sql.rowset.serial.SerialRef;
+import java.net.SocketException;
 
-    public static void main(String[] args) {
-	// write your code here
-    }
+public class Main
+{
+
+	public static void main(String[] args)
+	{
+		System.out.print("Hello!");
+	}
+
 }
