@@ -5,5 +5,5 @@ package com.company;
  */
 public class CheckeredPlane
 {
-
+    //Комментарий для проверки. Автор: Федоров А.
 }
