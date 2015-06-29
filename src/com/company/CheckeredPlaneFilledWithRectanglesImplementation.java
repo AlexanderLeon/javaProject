@@ -50,9 +50,19 @@ public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredP
 		return false;
 	}
 
+	public char checkTheCell(int x, int y)
+	{
+		return this.lab[x][y];
+	}
+
+	public Coordinates getTheStartPoint()
+	{
+		return startPoint;
+	}
+
 	char[][] theOptimalSolution;
 
-	public boolean getTheStartPoint()
+	boolean setTheStartPoint()
 	{
 		for (int i = startPoint.x; i < labHeight; i++)//-1???//finding the next recursive point
 			for (int j = startPoint.y; j < labWidth; j++)

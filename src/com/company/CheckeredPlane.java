@@ -5,13 +5,12 @@ package com.company;
  */
 
 /**
- * just a plane with simple functions notations
+ * just a plane with simple functions
  */
 public class CheckeredPlane
 {
 	int labSize = 100;
 
-	static char Wall = '#', Free = ' ', Dude = '*', EndPoint = 'e', StartPoint = 's';
 	int labHeight, labWidth;
 	public char [][] lab;
 
@@ -39,6 +38,11 @@ public class CheckeredPlane
 			}
 			//outfile << endl;
 		}
+	}
+
+	public void setTheCell(int x, int y, char inputSymbol)
+	{
+		this.lab[x][y] = inputSymbol;
 	}
 
 	public int getThePlaneHeight()

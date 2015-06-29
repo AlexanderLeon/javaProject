@@ -6,13 +6,14 @@ package com.company;
 
 interface CheckeredPlaneFilledWithRectangles
 {
+	char Wall = '#', Free = ' ', Dude = '*', EndPoint = 'e', StartPoint = 's';
+
 	boolean checkTheBorders();
 
-	/**
-	 * Sets new start point
-	 * @return true if there is NO start point on the plane
-	 */
-	boolean getTheStartPoint();
+	void setTheCell(int x, int y, char inputSymbol);
+	char checkTheCell(int x, int y);
+
+	Coordinates getTheStartPoint();
 
 	void showThePlane();
 

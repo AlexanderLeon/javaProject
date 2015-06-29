@@ -5,6 +5,11 @@ package com.company;
  */
 public class FillingWithRectanglesAlgorithm
 {
+	int MVG = 1;
+
+	int rectangleCounter = -1, minRectangleCount = Integer.MAX_VALUE, rightBorder = -1, bottomBorder = -1;
+	char filling = '$';
+
 	/*
 
 	/**
@@ -37,55 +42,54 @@ public class FillingWithRectanglesAlgorithm
 		}
 		return 0;
 	}
-
+	*/
 
 	boolean starter()//(ifstream &infile, ofstream &outfile)
 	{
 		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
 		Coordinates fillingStartPoint = new Coordinates(-1, -1);
 
-		//rectangleCounter = -1, minRectangleCount = MAXINT, filling = '$', rightBorder = -1, bottomBorder = -1;;
 
-		if (lab.checkTheBorders()) { cout << endl << "OMG!!!!111 Check the borders!" << endl << endl; return true; };
+		if (lab.checkTheBorders()) { System.out.println("OMG!!!!111 Check the borders!"); return true; };
 
-		int startTime = clock();
+		//int startTime = clock();
 
-		checkeredPlaneSolve(lab.startPoint.x, lab.startPoint.y, lab, optSol, fillingStartPoint, outfile);
+		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);
 
-		int endTime = clock();
-		int algorythmTime = endTime - startTime;
+		//int endTime = clock();
+		//int algorythmTime = endTime - startTime;
 
-		cout << "The optimal path is: " << endl;
-		outfile << "The optimal path is: " << endl;
-		optSol.showTheOptimalSolution();
-		optSol.outfileTheOptimalSolution(outfile);
-		cout << optSol.optimalCount << endl;
-		cout << "Filling time is: " << algorythmTime << endl;
+		System.out.println("The optimal path is: ");
+		//outfile << "The optimal path is: " << endl;
+		//optSol.showTheOptimalSolution();
+		//optSol.outfileTheOptimalSolution(outfile);
+		//cout << optSol.optimalCount << endl;
+		//cout << "Filling time is: " << algorythmTime << endl;
 		//optSol.showTheOptimalSolution(lab, optSol, outfile);
 		//outfile << endl << "The number of moves is " << optSol.minMoveCounter << endl;
 		//cout << endl << "The number of moves is " << optSol.minMoveCounter << endl << endl;
 		return true;
 	}
 
-	bool checkeredPlaneSolve(int x, int y, FillingWithRectanglesAlgorithm lab, CheckeredPlaneFillingWithRectanglesOptimalSolution &optSol, Coordinates fillingStartPoint, ofstream &outfile)
+	boolean checkeredPlaneSolve(int x, int y, CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)//, ofstream &outfile)
 	{
-		bool found = false;
+		boolean found = false;
 
-		if (visualise && filling > -1) visualization(lab);
+		//if (visualise && filling > -1) visualization(lab);
 
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//filling the plane
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
 			{
-				lab.lab[i][j] = filling;
+				lab.setTheCell(i,j,filling);
 			}
 
 		filling++;
 		rectangleCounter++;
 
-		for (int i = lab.startPoint.x; i < lab.labHeight && !found; i++)//-1???//finding the next recursive point
-			for (int j = lab.startPoint.y; j < lab.labWidth && !found; j++)
+		for (int i = lab.getTheStartPoint().x; i < lab.getThePlaneHeight() && !found; i++)//-1???//finding the next recursive point
+			for (int j = lab.getTheStartPoint().y; j < lab.getThePlaneWidth() && !found; j++)
 			{
-				if (lab.lab[i][j] == lab.Free)
+				if (lab.checkTheCell(i, j) == lab.Free)
 				{
 					fillingStartPoint.x = i;
 					fillingStartPoint.y = j;
@@ -94,29 +98,29 @@ public class FillingWithRectanglesAlgorithm
 			}
 		found = false;
 
-		if (!MVG) minRectangleCount = MAXINT;
+		//if (!MVG) minRectangleCount = Integer.MAX_VALUE;
 
-		if (!solved(lab) && (rectangleCounter < minRectangleCount) && getTheCurrentBottomBorderPosition(lab, fillingStartPoint, getTheRightBorderPosition(lab, fillingStartPoint)) && checkeredPlaneSolve(lab.startPoint.x, lab.startPoint.y, lab, optSol, fillingStartPoint, outfile))//fill to the right
+		/*if (!solved(lab) && (rectangleCounter < minRectangleCount) && getTheCurrentBottomBorderPosition(lab, fillingStartPoint, getTheRightBorderPosition(lab, fillingStartPoint)) && checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint))//fill to the right
 		{
 			return false;
 		}
 
-		if (!solved(lab) && (rectangleCounter < minRectangleCount) && getTheCurrentRightBorderPosition(lab, fillingStartPoint, getTheBottomBorderPosition(lab, fillingStartPoint)) && checkeredPlaneSolve(lab.startPoint.x, lab.startPoint.y, lab, optSol, fillingStartPoint, outfile))//fill to the bottom
+		if (!solved(lab) && (rectangleCounter < minRectangleCount) && getTheCurrentRightBorderPosition(lab, fillingStartPoint, getTheBottomBorderPosition(lab, fillingStartPoint)) && checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint))//fill to the bottom
 		{
 			return false;
 		}
-
+*/
 		if (solved(lab))
 		{
 			if (minRectangleCount > rectangleCounter)
 			{
 				minRectangleCount = rectangleCounter;
-				saveTheOptimalSolution(lab, optSol);
-				optSol.optimalCount = minRectangleCount;
+				//saveTheOptimalSolution(lab, optSol);
+				//optSol.optimalCount = minRectangleCount;
 			}
 		}
 
-		if (visualise) visualization(lab);
+		//if (visualise) visualization(lab);
 
 		filling--;
 
@@ -124,38 +128,38 @@ public class FillingWithRectanglesAlgorithm
 		return false;
 	}
 	//[ñòðîêà][ñòîëáåö]
-	int getTheRightBorderPosition(FillingWithRectanglesAlgorithm lab, Coordinates fillingStartPoint)
+	int getTheRightBorderPosition(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
 	{
-		for (int j = fillingStartPoint.y; j < lab.labWidth; j++)
+		for (int j = fillingStartPoint.y; j < lab.getThePlaneWidth(); j++)
 		{
-			if (lab.lab[fillingStartPoint.x][j] != lab.Free)
+			if (lab.checkTheCell(fillingStartPoint.x,j) != lab.Free)
 			{
 				rightBorder = j;
 				return j;//[ñòðîêà][ñòîëáåö]
 			}
 		}
-		return lab.labWidth;
+		return lab.getThePlaneWidth();
 	}
-	int getTheBottomBorderPosition(FillingWithRectanglesAlgorithm lab, Coordinates fillingStartPoint)
+	int getTheBottomBorderPosition(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
 	{
-		for (int i = fillingStartPoint.x; i < lab.labHeight; i++)
+		for (int i = fillingStartPoint.x; i < lab.getThePlaneHeight(); i++)
 		{
-			if (lab.lab[i][fillingStartPoint.y] != lab.Free)
+			if (lab.checkTheCell(i,fillingStartPoint.y) != lab.Free)
 			{
 				bottomBorder = i;
 				return i;//[ñòðîêà][ñòîëáåö]
 			}
 		}
-		return lab.labHeight;
+		return lab.getThePlaneHeight();
 	}
 
-	int getTheCurrentRightBorderPosition(FillingWithRectanglesAlgorithm lab, Coordinates fillingStartPoint, int bottomBorder)
+	int getTheCurrentRightBorderPosition(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint, int bottomBorder)
 	{
-		rightBorder = lab.labWidth;
+		rightBorder = lab.getThePlaneWidth();;
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//-1???
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
 			{
-				if (lab.lab[i][j] != lab.Free)
+				if (lab.checkTheCell(i,j) != lab.Free)
 				{
 					if (j < rightBorder)
 					{
@@ -165,13 +169,13 @@ public class FillingWithRectanglesAlgorithm
 			}
 		return rightBorder;
 	}
-	int getTheCurrentBottomBorderPosition(FillingWithRectanglesAlgorithm lab, Coordinates fillingStartPoint, int rightBorder)
+	int getTheCurrentBottomBorderPosition(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint, int rightBorder)
 	{
-		bottomBorder = lab.labHeight;
+		bottomBorder = lab.getThePlaneHeight();
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//-1???
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
 			{
-				if (lab.lab[i][j] != lab.Free)
+				if (lab.checkTheCell(i,j) != lab.Free)
 					if (i < bottomBorder)
 					{
 						bottomBorder = i;// i = currentBottomBorderPosition
@@ -180,59 +184,59 @@ public class FillingWithRectanglesAlgorithm
 		return bottomBorder;
 	}
 
-	boolean getNewFillingStartpoint(FillingWithRectanglesAlgorithm lab, Coordinates fillingStartPoint)
+	boolean getNewFillingStartPoint(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
 	{
-		for (int i = lab.startPoint.x; i < lab.labHeight; i++)//-1???
-			for (int j = lab.startPoint.y; j < lab.labWidth; j++)
+		for (int i = lab.getTheStartPoint().x; i < lab.getThePlaneHeight(); i++)//-1???
+			for (int j = lab.getTheStartPoint().y; j < lab.getThePlaneWidth(); j++)
 			{
-				if (lab.lab[i][j] != lab.Free)
+				if (lab.checkTheCell(i, j) != lab.Free)
 				{
 					fillingStartPoint.x = i;
 					fillingStartPoint.y = j;
-					return 0;
+					return false;
 				}
 			}
-		return 0;
+		return false;
 	}
 
-	void showThePlane(FillingWithRectanglesAlgorithm lab)
+	void showThePlane(CheckeredPlaneFilledWithRectangles lab)
 	{
-		for (int i = 0; i < lab.labHeight; i++)
+		for (int i = 0; i < lab.getThePlaneHeight(); i++)
 		{
-			for (int j = 0; j < lab.labWidth; j++)
+			for (int j = 0; j < lab.getThePlaneWidth(); j++)
 			{
-				cout << lab.lab[i][j];
+				System.out.print(lab.checkTheCell(i, j));
 			}
-			cout << endl;
+			System.out.println("");
 		}
 	}
 
-	boolean solved(FillingWithRectanglesAlgorithm lab)
+	boolean solved(CheckeredPlaneFilledWithRectangles lab)
 	{
-		for (int i = 0; i < lab.showThePlane; i++)
+		for (int i = 0; i < lab.getThePlaneHeight(); i++)
 		{
-			for (int j = 0; j < lab.labWidth; j++)
+			for (int j = 0; j < lab.getThePlaneWidth(); j++)
 			{
-				if (lab.lab[i][j] == lab.Free) return false;
+				if (lab.checkTheCell(i, j) == lab.Free) return false;
 			}
 		}
 		return true;
 	}
 
-	void visualization(ÑheckeredPlaneFillingWithRectangles lab)
+	void visualization(CheckeredPlaneFilledWithRectangles lab)
 	{
 		showThePlane(lab);
-		cout << rectangleCounter << endl;
-		_getch();
-		system("cls");
+		//cout << rectangleCounter << endl;
+		//_getch();
+		//system("cls");
 	}
 
-	void saveTheOptimalSolution(ÑheckeredPlaneFillingWithRectangles lab, CheckeredPlaneFillingWithRectanglesOptimalSolution &optPath)
+	void saveTheOptimalSolution(CheckeredPlaneFilledWithRectangles lab)
 	{
-		for (int i = 0; i < lab.labHeight; i++)
-			for (int j = 0; j < lab.labWidth; j++)
-				optPath.theOptimalSolution[i][j] = lab.lab[i][j];
+		for (int i = 0; i < lab.getThePlaneHeight(); i++)
+			for (int j = 0; j < lab.getThePlaneWidth(); j++)
+			{
+				//optPath.theOptimalSolution[i][j] = lab.lab[i][j];
+			}
 	}
-
-	 */
 }
