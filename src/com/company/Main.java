@@ -10,6 +10,7 @@ public class Main
 	{
 		System.out.print("Hello!");
 
+		Coordinates a = new Coordinates(1,2);
 	}
 
 }
