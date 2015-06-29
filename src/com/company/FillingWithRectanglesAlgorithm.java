@@ -57,7 +57,7 @@ public class FillingWithRectanglesAlgorithm
 		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);
 
 		//int endTime = clock();
-		//int algorythmTime = endTime - startTime;
+		//int algorithmTime = endTime - startTime;
 
 		System.out.println("The optimal path is: ");
 		//outfile << "The optimal path is: " << endl;
@@ -89,7 +89,7 @@ public class FillingWithRectanglesAlgorithm
 		for (int i = lab.getTheStartPoint().x; i < lab.getThePlaneHeight() && !found; i++)//-1???//finding the next recursive point
 			for (int j = lab.getTheStartPoint().y; j < lab.getThePlaneWidth() && !found; j++)
 			{
-				if (lab.checkTheCell(i, j) == lab.Free)
+				if (lab.checkTheCell(i, j) == CheckeredPlaneFilledWithRectangles.Free)
 				{
 					fillingStartPoint.x = i;
 					fillingStartPoint.y = j;
@@ -100,16 +100,16 @@ public class FillingWithRectanglesAlgorithm
 
 		//if (!MVG) minRectangleCount = Integer.MAX_VALUE;
 
-		/*if (!solved(lab) && (rectangleCounter < minRectangleCount) && getTheCurrentBottomBorderPosition(lab, fillingStartPoint, getTheRightBorderPosition(lab, fillingStartPoint)) && checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint))//fill to the right
+		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint))
 		{
 			return false;
 		}
 
-		if (!solved(lab) && (rectangleCounter < minRectangleCount) && getTheCurrentRightBorderPosition(lab, fillingStartPoint, getTheBottomBorderPosition(lab, fillingStartPoint)) && checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint))//fill to the bottom
+		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint))
 		{
 			return false;
 		}
-*/
+
 		if (solved(lab))
 		{
 			if (minRectangleCount > rectangleCounter)
@@ -127,12 +127,27 @@ public class FillingWithRectanglesAlgorithm
 		rectangleCounter--;
 		return false;
 	}
+
+	boolean fillToTheRight(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
+	{
+		getTheCurrentBottomBorderPosition(lab, fillingStartPoint, getTheRightBorderPosition(lab, fillingStartPoint));
+		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);//fill to the right
+		return true;
+	}
+
+	boolean fillToTheBottom(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
+	{
+		getTheCurrentRightBorderPosition(lab, fillingStartPoint, getTheBottomBorderPosition(lab, fillingStartPoint));
+		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);//fill to the bottom
+		return true;
+	}
+
 	//[строка][столбец]
 	int getTheRightBorderPosition(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
 	{
 		for (int j = fillingStartPoint.y; j < lab.getThePlaneWidth(); j++)
 		{
-			if (lab.checkTheCell(fillingStartPoint.x,j) != lab.Free)
+			if (lab.checkTheCell(fillingStartPoint.x,j) != CheckeredPlaneFilledWithRectangles.Free)
 			{
 				rightBorder = j;
 				return j;//[строка][столбец]
@@ -144,7 +159,7 @@ public class FillingWithRectanglesAlgorithm
 	{
 		for (int i = fillingStartPoint.x; i < lab.getThePlaneHeight(); i++)
 		{
-			if (lab.checkTheCell(i,fillingStartPoint.y) != lab.Free)
+			if (lab.checkTheCell(i,fillingStartPoint.y) != CheckeredPlaneFilledWithRectangles.Free)
 			{
 				bottomBorder = i;
 				return i;//[строка][столбец]
@@ -159,7 +174,7 @@ public class FillingWithRectanglesAlgorithm
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//-1???
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
 			{
-				if (lab.checkTheCell(i,j) != lab.Free)
+				if (lab.checkTheCell(i,j) != CheckeredPlaneFilledWithRectangles.Free)
 				{
 					if (j < rightBorder)
 					{
@@ -175,7 +190,7 @@ public class FillingWithRectanglesAlgorithm
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//-1???
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
 			{
-				if (lab.checkTheCell(i,j) != lab.Free)
+				if (lab.checkTheCell(i,j) != CheckeredPlaneFilledWithRectangles.Free)
 					if (i < bottomBorder)
 					{
 						bottomBorder = i;// i = currentBottomBorderPosition
@@ -189,7 +204,7 @@ public class FillingWithRectanglesAlgorithm
 		for (int i = lab.getTheStartPoint().x; i < lab.getThePlaneHeight(); i++)//-1???
 			for (int j = lab.getTheStartPoint().y; j < lab.getThePlaneWidth(); j++)
 			{
-				if (lab.checkTheCell(i, j) != lab.Free)
+				if (lab.checkTheCell(i, j) != CheckeredPlaneFilledWithRectangles.Free)
 				{
 					fillingStartPoint.x = i;
 					fillingStartPoint.y = j;
@@ -217,7 +232,7 @@ public class FillingWithRectanglesAlgorithm
 		{
 			for (int j = 0; j < lab.getThePlaneWidth(); j++)
 			{
-				if (lab.checkTheCell(i, j) == lab.Free) return false;
+				if (lab.checkTheCell(i, j) == CheckeredPlaneFilledWithRectangles.Free) return false;
 			}
 		}
 		return true;
