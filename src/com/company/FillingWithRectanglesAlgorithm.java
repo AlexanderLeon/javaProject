@@ -1,5 +1,7 @@
 package com.company;
 
+import java.io.FileInputStream;
+
 /**
  * Created by Александр on 29.06.2015.
  */
@@ -44,11 +46,16 @@ public class FillingWithRectanglesAlgorithm
 	}
 	*/
 
-	boolean starter()//(ifstream &infile, ofstream &outfile)
+	void startAlgorithm(FileInputStream in)
 	{
-		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
-		Coordinates fillingStartPoint = new Coordinates(-1, -1);
+		starter(in);
+	}
 
+	boolean starter(FileInputStream in)//(ifstream &infile, ofstream &outfile)
+	{
+		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation(in);
+
+		Coordinates fillingStartPoint = new Coordinates(-1, -1);
 
 		if (lab.checkTheBorders()) { System.out.println("OMG!!!!111 Check the borders!"); return true; };
 
@@ -76,6 +83,8 @@ public class FillingWithRectanglesAlgorithm
 		boolean found = false;
 
 		//if (visualise && filling > -1) visualization(lab);
+
+		visualization(lab);
 
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//filling the plane
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
@@ -121,6 +130,8 @@ public class FillingWithRectanglesAlgorithm
 		}
 
 		//if (visualise) visualization(lab);
+
+		visualization(lab);
 
 		filling--;
 

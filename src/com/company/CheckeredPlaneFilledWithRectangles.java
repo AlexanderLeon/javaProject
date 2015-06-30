@@ -16,7 +16,6 @@ interface CheckeredPlaneFilledWithRectangles
 	Coordinates getTheStartPoint();
 
 	void showThePlane();
-
 	void outfileThePlane();
 
 	int getThePlaneHeight();

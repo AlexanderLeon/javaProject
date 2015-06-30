@@ -12,7 +12,14 @@ public class CheckeredPlane
 	int labSize = 100;
 
 	int labHeight, labWidth;
-	public char [][] lab;
+	public char [][] lab;// = {
+	//		{'#', '#', '#', '#', '#', '#'},
+	//		{'#', ' ', ' ', ' ', '#', '#'},
+	//		{'#', ' ', '#', ' ', ' ', ' '},
+	//		{'#', ' ', ' ', ' ', '#', ' '},
+	//		{'#', ' ', '#', ' ', ' ', ' '},
+	//		{'#', '#', '#', '#', '#', '#'},
+	//};
 
 	Coordinates startPoint, endPoint;//,coordinates;
 
