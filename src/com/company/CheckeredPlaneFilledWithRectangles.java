@@ -6,7 +6,7 @@ package com.company;
 
 interface CheckeredPlaneFilledWithRectangles
 {
-	char Wall = '#', Free = ' ', Dude = '*', EndPoint = 'e', StartPoint = 's';
+	char Wall = '#', Free = ' ';
 
 	boolean checkTheBorders();
 

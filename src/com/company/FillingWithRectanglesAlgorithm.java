@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 public class FillingWithRectanglesAlgorithm
 {
 	int MVG = 1;
+	boolean found = false;
 
 	int rectangleCounter = -1, minRectangleCount = Integer.MAX_VALUE, rightBorder = -1, bottomBorder = -1;
 	char filling = '$';
@@ -17,7 +18,7 @@ public class FillingWithRectanglesAlgorithm
 		starter();//(in);
 	}
 
-	boolean starter()//(FileInputStream in)//(ifstream &infile, ofstream &outfile)
+	boolean starter()//(FileInputStream in)
 	{
 		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
 
@@ -46,7 +47,7 @@ public class FillingWithRectanglesAlgorithm
 
 	boolean checkeredPlaneSolve(int x, int y, CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)//, ofstream &outfile)
 	{
-		boolean found = false;
+
 
 		//if (visualise && filling > -1) visualization(lab);
 
@@ -77,12 +78,12 @@ public class FillingWithRectanglesAlgorithm
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint))
 		{
-			return false;
+			return true;
 		}
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint))
 		{
-			return false;
+			return true;
 		}
 
 		if (solved(lab))
@@ -102,7 +103,7 @@ public class FillingWithRectanglesAlgorithm
 		filling--;
 
 		rectangleCounter--;
-		return false;
+		return true;
 	}
 
 	boolean fillToTheRight(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
