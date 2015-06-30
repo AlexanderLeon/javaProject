@@ -1,33 +1,15 @@
 package com.company;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 /**
  * Created by Александр on 29.06.2015.
  */
 public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredPlane implements CheckeredPlaneFilledWithRectangles
 {
-	CheckeredPlaneFilledWithRectanglesImplementation()
-	{
-		int x = 0, y = 0;
-		char temp_char = '1';//
-
-		/*while (infile.get(temp_char))
-		{
-			if (temp_char == '\n')
-			{
-				x++;
-				y = 0;
-			}
-			else
-			{
-				lab[x][y] = temp_char;
-				y++;
-			}
-		}
-		labHeight = x + 1;
-		labWidth = y;
-		*/
-		//проверка на правильность построения поля
-	}
+	public Coordinates startPoint = new Coordinates(0,0);
 
 	public boolean checkTheBorders()
 	{

@@ -1,54 +1,28 @@
 package com.company;
 
+import java.io.FileInputStream;
+
 /**
  * Created by Александр on 29.06.2015.
  */
 public class FillingWithRectanglesAlgorithm
 {
 	int MVG = 1;
+	boolean found = false;
 
 	int rectangleCounter = -1, minRectangleCount = Integer.MAX_VALUE, rightBorder = -1, bottomBorder = -1;
 	char filling = '$';
 
-	/*
-
-	/**
-	 * Открытие файловых потоков
-	 * @return
-	 */
-	/*boolean startFillingThePlane()
+	void startAlgorithm(FileInputStream in)
 	{
-		*outName = { 0 };
-		cout << "Which file do you want to open? Enter the 'name'. name.txt" << endl;
-		cin >> fName;
-		strcat_s(outName, fName);
-		strcat_s(outName, "out.txt");
-		strcat_s(fName, ".txt");
-		ifstream infile(fName);
-
-		if (!infile) { cout << "Unable to open input file!" << endl; return 1; }
-		else
-		{
-			ofstream outfile(outName);
-			outfile << infile.rdbuf();//
-			outfile << " - Source" << endl << endl;
-			infile.clear();
-			infile.seekg(0, ios::beg);
-			cout << "CheckeredPlane algorithm:" << endl;
-
-			starter(infile, outfile);
-
-			cout << "Open the " << outName << " to see the results." << endl;
-		}
-		return 0;
+		starter();//(in);
 	}
-	*/
 
-	boolean starter()//(ifstream &infile, ofstream &outfile)
+	boolean starter()//(FileInputStream in)
 	{
 		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
-		Coordinates fillingStartPoint = new Coordinates(-1, -1);
 
+		Coordinates fillingStartPoint = new Coordinates(0, 0);
 
 		if (lab.checkTheBorders()) { System.out.println("OMG!!!!111 Check the borders!"); return true; };
 
@@ -73,9 +47,11 @@ public class FillingWithRectanglesAlgorithm
 
 	boolean checkeredPlaneSolve(int x, int y, CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)//, ofstream &outfile)
 	{
-		boolean found = false;
+
 
 		//if (visualise && filling > -1) visualization(lab);
+
+		visualization(lab);
 
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//filling the plane
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
@@ -102,12 +78,12 @@ public class FillingWithRectanglesAlgorithm
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint))
 		{
-			return false;
+			return true;
 		}
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint))
 		{
-			return false;
+			return true;
 		}
 
 		if (solved(lab))
@@ -122,10 +98,12 @@ public class FillingWithRectanglesAlgorithm
 
 		//if (visualise) visualization(lab);
 
+		visualization(lab);
+
 		filling--;
 
 		rectangleCounter--;
-		return false;
+		return true;
 	}
 
 	boolean fillToTheRight(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
