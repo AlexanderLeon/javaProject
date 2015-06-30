@@ -12,7 +12,7 @@ class GUIVisTesting
         File file=gui.input();
         if(file!=null)
         {
-            //הויסעגטÿ ס פאיכמל
+            //הויסעגטÿ ס  פאיכמל
         }
         final char[][] field1 = new char[5][5];
         final int width1=3, height1=3;
