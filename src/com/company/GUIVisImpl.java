@@ -22,10 +22,18 @@ class GUIVisImpl implements GUIVis
                 {
                     int w=0;
                     for(int k=i; field[k][j]==symbol; k++)
+                    {
+                        if(k>width)
+                            break;
                         w++;
+                    }
                     int h=0;
                     for(int k=j; field[i][k]==symbol; k++)
+                    {
+                        if(k>height)
+                            break;
                         h++;
+                    }
                     if(symbol=='#')
                     {
                         g.fillRect((i - 1) * sizeOfFieldElement + 10, (j - 1) * sizeOfFieldElement + 40, w * sizeOfFieldElement, h * sizeOfFieldElement);
@@ -84,6 +92,9 @@ class GUIVisImpl implements GUIVis
                 {
                     super.paintComponent(g);
                     g2 = (Graphics2D) g;
+                    g2.setColor(jfrm.getBackground());
+                    g2.fillRect(10, 40, 770, 450);
+                    g2 = (Graphics2D) g;
                     g2.setColor(Color.black);
                     int sizeOfFieldElement1 = 770 / width;
                     int sizeOfFieldElement2 = 450 / height;
@@ -126,8 +137,56 @@ class GUIVisImpl implements GUIVis
     jfrm.add(jlab);*/
     public void resultVis(char[][] field, int width, int height)
     {
-        middleVis(field, width, height);
-
+        jfrm.setVisible(true);
+        if(isStart)
+        {
+            contentPane = new JPanel()
+            {
+                Graphics2D g2;
+                protected void paintComponent(Graphics g)
+                {
+                    super.paintComponent(g);
+                    g2 = (Graphics2D) g;
+                    g2 = (Graphics2D) g;
+                    g2.setColor(jfrm.getBackground());
+                    g2.fillRect(10, 40, 770, 450);
+                    g2.setColor(Color.black);
+                    int sizeOfFieldElement1 = 770 / width;
+                    int sizeOfFieldElement2 = 450 / height;
+                    int sizeOfFieldElement;
+                    if (sizeOfFieldElement1 < sizeOfFieldElement2)
+                        sizeOfFieldElement = sizeOfFieldElement1;
+                    else
+                        sizeOfFieldElement = sizeOfFieldElement2;
+                    g2.setColor(Color.white);
+                    g2.fillRect(10, 40, sizeOfFieldElement * width, sizeOfFieldElement * height);
+                    g2.setColor(Color.black);
+                    g2.drawRect(10, 40, sizeOfFieldElement * width, sizeOfFieldElement * height);
+                    for (char symbol = '#'; drawRectangle(field, width, height, symbol, sizeOfFieldElement, g2); symbol++);
+                }
+            };
+        }
+        jfrm.setContentPane(contentPane);
+        jfrm.setLayout(null);
+        nextStep[0]=false;
+        JLabel jlab = new JLabel("Заполнение наименьшим количеством прямоугольников: ");
+        jlab.setFont(new Font("Arial", Font.PLAIN, 20));
+        jlab.setLocation(0, 0);
+        jlab.setSize(550, 30);
+        jfrm.add(jlab);
+        JButton continueButton = new JButton("Продолжить");
+        jbtn.setVisible(false);
+        continueButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+                nextStep[0] = true;
+            }
+        });
+        continueButton.setSize(150, 50);
+        continueButton.setLocation(200, 500);
+        jfrm.add(continueButton);
+        jcb.setVisible(false);
+        isStart=false;
+        while(!nextStep[0]);
     }
     public void resultVis(char[][] field, int width, int height, double time, String unit)
     {
