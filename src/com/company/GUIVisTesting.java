@@ -9,7 +9,8 @@ class GUIVisTesting
     public static void main(String args[])
     {
         GUIVis gui=new GUIVisImpl();
-        if(gui.input()!=null)
+        File file=gui.input();
+        if(file!=null)
         {
             //הויסעגטÿ ס פאיכמל
         }
