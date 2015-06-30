@@ -12,40 +12,6 @@ public class FillingWithRectanglesAlgorithm
 	int rectangleCounter = -1, minRectangleCount = Integer.MAX_VALUE, rightBorder = -1, bottomBorder = -1;
 	char filling = '$';
 
-	/*
-
-	/**
-	 * Открытие файловых потоков
-	 * @return
-	 */
-	/*boolean startFillingThePlane()
-	{
-		*outName = { 0 };
-		cout << "Which file do you want to open? Enter the 'name'. name.txt" << endl;
-		cin >> fName;
-		strcat_s(outName, fName);
-		strcat_s(outName, "out.txt");
-		strcat_s(fName, ".txt");
-		ifstream infile(fName);
-
-		if (!infile) { cout << "Unable to open input file!" << endl; return 1; }
-		else
-		{
-			ofstream outfile(outName);
-			outfile << infile.rdbuf();//
-			outfile << " - Source" << endl << endl;
-			infile.clear();
-			infile.seekg(0, ios::beg);
-			cout << "CheckeredPlane algorithm:" << endl;
-
-			starter(infile, outfile);
-
-			cout << "Open the " << outName << " to see the results." << endl;
-		}
-		return 0;
-	}
-	*/
-
 	void startAlgorithm(FileInputStream in)
 	{
 		starter(in);

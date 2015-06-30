@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.sql.rowset.serial.SerialRef;
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.SocketException;
 
@@ -10,6 +11,13 @@ public class Main
 	public static void main(String[] args)
 	{
 		//Вот тута нужно открытие потока FileInputStream
+
+		GUIVis gui=new GUIVisImpl();
+		File file=gui.input();
+		if(file!=null)
+		{
+
+		}
 
 		//FileInputStream in = null;
 		//try
