@@ -5,7 +5,7 @@ package com.company;
  */
 class Coordinates
 {
-	int x;
-	int y;
-	Coordinates(int X, int Y) { x = X; y = Y; }
+	int x = 0;
+	int y = 0;
+	Coordinates(int X , int Y) { x = X; y = Y; }
 }

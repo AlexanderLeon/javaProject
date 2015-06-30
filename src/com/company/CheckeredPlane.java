@@ -1,10 +1,6 @@
 package com.company;
 
 /**
- * Created by Александр on 29.06.2015.
- */
-
-/**
  * just a plane with simple functions
  */
 public class CheckeredPlane
@@ -12,16 +8,8 @@ public class CheckeredPlane
 	int labSize = 100;
 
 	int labHeight, labWidth;
-	public char [][] lab;// = {
-	//		{'#', '#', '#', '#', '#', '#'},
-	//		{'#', ' ', ' ', ' ', '#', '#'},
-	//		{'#', ' ', '#', ' ', ' ', ' '},
-	//		{'#', ' ', ' ', ' ', '#', ' '},
-	//		{'#', ' ', '#', ' ', ' ', ' '},
-	//		{'#', '#', '#', '#', '#', '#'},
-	//};
 
-	Coordinates startPoint, endPoint;//,coordinates;
+	public char [][] lab = new char[labSize][labSize];
 
 	public void showThePlane()
 	{
@@ -33,6 +21,22 @@ public class CheckeredPlane
 			}
 			System.out.println("");
 		}
+	}
+
+	CheckeredPlane()
+	{
+		lab[0][0] = '#';
+		lab[0][1] = '#';
+		lab[0][2] = '#';
+		lab[1][0] = '#';
+		lab[1][1] = ' ';
+		lab[1][2] = '#';
+		lab[2][0] = '#';
+		lab[2][1] = '#';
+		lab[2][2] = '#';
+
+		labHeight = 3;
+		labWidth = 3;
 	}
 
 	public void outfileThePlane()

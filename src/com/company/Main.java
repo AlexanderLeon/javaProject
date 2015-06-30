@@ -3,21 +3,22 @@ package com.company;
 import javax.sql.rowset.serial.SerialRef;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.SocketException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main
 {
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
 		//Вот тута нужно открытие потока FileInputStream
 
-		GUIVis gui=new GUIVisImpl();
-		File file=gui.input();
-		if(file!=null)
-		{
+		FillingWithRectanglesAlgorithm a = new FillingWithRectanglesAlgorithm();
 
-		}
+		a.starter();
 
 		//FileInputStream in = null;
 		//try

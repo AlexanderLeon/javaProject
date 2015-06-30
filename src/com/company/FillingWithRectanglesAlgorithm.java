@@ -14,14 +14,14 @@ public class FillingWithRectanglesAlgorithm
 
 	void startAlgorithm(FileInputStream in)
 	{
-		starter(in);
+		starter();//(in);
 	}
 
-	boolean starter(FileInputStream in)//(ifstream &infile, ofstream &outfile)
+	boolean starter()//(FileInputStream in)//(ifstream &infile, ofstream &outfile)
 	{
-		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation(in);
+		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
 
-		Coordinates fillingStartPoint = new Coordinates(-1, -1);
+		Coordinates fillingStartPoint = new Coordinates(0, 0);
 
 		if (lab.checkTheBorders()) { System.out.println("OMG!!!!111 Check the borders!"); return true; };
 

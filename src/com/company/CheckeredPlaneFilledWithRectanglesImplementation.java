@@ -9,38 +9,7 @@ import java.io.IOException;
  */
 public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredPlane implements CheckeredPlaneFilledWithRectangles
 {
-	CheckeredPlaneFilledWithRectanglesImplementation(FileInputStream in)
-	{
-		in = null;
-		int x = 0, y = 0;
-
-		try
-		{
-			char current;
-			while (in.available() > 0)
-			{
-				current = (char) in.read();
-				if (current == '\n')
-				{
-					x++;
-					y = 0;
-				}
-				else
-				{
-					lab[x][y] = current;
-					y++;
-				}
-			}
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		labHeight = x + 1;
-		labWidth = y;
-		//проверка на правильность построения поля
-	}
+	public Coordinates startPoint = new Coordinates(0,0);
 
 	public boolean checkTheBorders()
 	{
