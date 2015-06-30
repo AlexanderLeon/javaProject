@@ -9,7 +9,7 @@ class GUIVisTesting
     public static void main(String args[])
     {
         GUIVis gui=new GUIVisImpl();
-        if(gui.GUIinput()!=null)
+        if(gui.input()!=null)
         {
             //הויסעגטÿ ס פאיכמל
         }
@@ -23,18 +23,20 @@ class GUIVisTesting
             field1[i][4]='#';
         }
         field1[2][2]='#';
-        System.out.println("-----------------------1");
-        gui.GUImiddleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[1][1]='$';
         field1[2][1]='$';
         field1[3][1]='$';
-        System.out.println("-----------------------2");
-        gui.GUImiddleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[1][2]='%';
-        System.out.println("-----------------------3");
-        gui.GUImiddleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[3][1]=0;
-        System.out.println("-----------------------4");
-        gui.GUImiddleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
+        field1[3][2]='^';
+        field1[1][3]='&';
+        field1[2][3]='&';
+        field1[3][3]='&';
+        gui.resultVis(field1, width1, height1);
+        gui.resultVis(field1, width1, height1, 0.5, "לס");
     }
 }
