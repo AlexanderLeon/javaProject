@@ -7,7 +7,6 @@ import java.io.FileInputStream;
  */
 public class FillingWithRectanglesAlgorithm
 {
-	int MVG = 1;
 	boolean found = false;
 
 	int rectangleCounter = -1, minRectangleCount = Integer.MAX_VALUE, rightBorder = -1, bottomBorder = -1;
@@ -20,7 +19,7 @@ public class FillingWithRectanglesAlgorithm
 
 	boolean starter()//(FileInputStream in)
 	{
-		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
+		final CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
 
 		Coordinates fillingStartPoint = new Coordinates(0, 0);
 
@@ -34,6 +33,7 @@ public class FillingWithRectanglesAlgorithm
 		//int algorithmTime = endTime - startTime;
 
 		System.out.println("The optimal path is: ");
+		visualization(lab);
 		//outfile << "The optimal path is: " << endl;
 		//optSol.showTheOptimalSolution();
 		//optSol.outfileTheOptimalSolution(outfile);
@@ -47,14 +47,6 @@ public class FillingWithRectanglesAlgorithm
 
 	boolean checkeredPlaneSolve(int x, int y, CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)//, ofstream &outfile)
 	{
-
-
-		//if (visualise && filling > -1) visualization(lab);
-		char [][]labcopy;
-		labcopy=new char[100][100];
-		for(int i=0; i<100;i++)
-			for(int j=0;j<100;j++)
-				labcopy[i][j]=lab.getLab()[i][j];
 		visualization(lab);
 
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//filling the plane
@@ -82,13 +74,11 @@ public class FillingWithRectanglesAlgorithm
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint))
 		{
-			lab.setLab(labcopy);
 			return true;
 		}
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint))
 		{
-			lab.setLab(labcopy);
 			return true;
 		}
 
@@ -102,14 +92,11 @@ public class FillingWithRectanglesAlgorithm
 			}
 		}
 
-		//if (visualise) visualization(lab);
-
 		visualization(lab);
 
 		filling--;
-
 		rectangleCounter--;
-		lab.setLab(labcopy);
+
 		return true;
 	}
 

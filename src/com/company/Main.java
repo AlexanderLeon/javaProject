@@ -1,10 +1,7 @@
 package com.company;
 
 import javax.sql.rowset.serial.SerialRef;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +11,6 @@ public class Main
 
 	public static void main(String[] args) throws FileNotFoundException
 	{
-		//Вот тута нужно открытие потока FileInputStream
 
 		FillingWithRectanglesAlgorithm a = new FillingWithRectanglesAlgorithm();
 
