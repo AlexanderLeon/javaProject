@@ -13,11 +13,10 @@ class GUIVisTesting
     public static void main(String args[])
     {
         GUIVis gui=new GUIVisImpl();
-        File file=gui.input();
-        if(file!=null)
+        char[][] field=gui.input();
+        if(field==null)
         {
-            String str=file.toString();
-            //действия с  файлом
+            //файл не был открыт
         }
         final char[][] field1 = new char[5][5];
         final int width1=3, height1=3;
@@ -42,11 +41,9 @@ class GUIVisTesting
         field1[1][3]='&';
         field1[2][3]='&';
         gui.resultVis(field1, width1, height1);
-        File file1=gui.input();
-        if(file!=null)
+        if(gui.input()!=null)
         {
-            String str=file1.toString();
-            //действия с  файлом
+
         }
         final char[][] field2 = new char[5][5];
         final int width2=3, height2=2;

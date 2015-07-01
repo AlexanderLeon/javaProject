@@ -6,7 +6,7 @@ package com.company;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 class GUIVisImpl implements GUIVis
 {
@@ -30,7 +30,6 @@ class GUIVisImpl implements GUIVis
     private int []widthptr=new int[1];
     /**высота поля*/
     private int []heightptr=new int[1];
-
     /** отрисовка дыр на поле и прямоугольников
     * @param field поле
     * @param width ширина поля
@@ -96,12 +95,32 @@ class GUIVisImpl implements GUIVis
         jcb.setSize(200, 20);
         jcb.setLocation(360, 500);
     }
-    public File input()
+    public char[][] input()
     {
         JFileChooser fileopen=new JFileChooser();
+        char [][]field=new char[100][100];
         int ret=fileopen.showDialog(null, "Открыть файл");
         if(ret==JFileChooser.APPROVE_OPTION)
-            return fileopen.getSelectedFile();
+        {
+            File file=fileopen.getSelectedFile();
+            try
+            {
+                BufferedReader in = new BufferedReader(new FileReader( file));
+                String str;
+                int j=0;
+                while ((str = in.readLine()) != null)
+                {
+                    for(int i=0; i<str.length(); i++)
+                        field[i][j]=str.charAt(i);
+                    j++;
+                }
+            }
+            catch(IOException e)
+            {
+                throw new RuntimeException(e);
+            }
+            return field;
+        }
         else
             return null;
     }
