@@ -11,6 +11,7 @@ public class CheckeredPlane
 
 	public char [][] lab = new char[labSize][labSize];
 
+
 	public void showThePlane()
 	{
 		for (int i = 0; i < labHeight; i++)

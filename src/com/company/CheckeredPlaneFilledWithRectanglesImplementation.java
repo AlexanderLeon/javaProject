@@ -9,6 +9,14 @@ import java.io.IOException;
  */
 public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredPlane implements CheckeredPlaneFilledWithRectangles
 {
+	public char [][] getLab()
+	{
+		return lab;
+	}
+	public void setLab(char [][] l)
+	{
+		lab=l;
+	}
 	public Coordinates startPoint = new Coordinates(0,0);
 
 	public boolean checkTheBorders()

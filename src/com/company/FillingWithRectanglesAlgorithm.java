@@ -50,7 +50,11 @@ public class FillingWithRectanglesAlgorithm
 
 
 		//if (visualise && filling > -1) visualization(lab);
-
+		char [][]labcopy;
+		labcopy=new char[100][100];
+		for(int i=0; i<100;i++)
+			for(int j=0;j<100;j++)
+				labcopy[i][j]=lab.getLab()[i][j];
 		visualization(lab);
 
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//filling the plane
@@ -78,11 +82,13 @@ public class FillingWithRectanglesAlgorithm
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint))
 		{
+			lab.setLab(labcopy);
 			return true;
 		}
 
 		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint))
 		{
+			lab.setLab(labcopy);
 			return true;
 		}
 
@@ -103,6 +109,7 @@ public class FillingWithRectanglesAlgorithm
 		filling--;
 
 		rectangleCounter--;
+		lab.setLab(labcopy);
 		return true;
 	}
 
