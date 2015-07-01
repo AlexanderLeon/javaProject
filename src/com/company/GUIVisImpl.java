@@ -1,3 +1,7 @@
+/**
+ класс для обеспечения графической визуализации выполнения алгоритма
+ @author Федоров Андрей Михайлович
+ */
 package com.company;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,14 +10,37 @@ import java.io.File;
 import java.util.Scanner;
 class GUIVisImpl implements GUIVis
 {
+    /**окно визуализации*/
     private JFrame jfrm;
+    /**кнопка для перехода к следующему шагу*/
     private JButton jbtn;
+    /**панель для отображения поля и прямоугольников*/
     private JPanel contentPane;
+    /**флажок для отключения визуализации*/
     private JCheckBox jcb;
+    /**если перемееная равна true, необходимо осуществить переход к следующему шагу*/
     private final boolean[]nextStep={false};
+    /**если перемееная равна true, значит функция визуализации была вызвана первый раз*/
     private boolean isStart;
+    /**если перемееная равна false, визуализацию необходимо завершить*/
     private boolean isVis;
-    private boolean drawRectangle(char [][]field, int width, int height, char symbol, int sizeOfFieldElement,Graphics2D g)
+    /**поле*/
+    private char [][][]fieldptr=new char[100][100][1];
+    /**ширина поля*/
+    private int []widthptr=new int[1];
+    /**высота поля*/
+    private int []heightptr=new int[1];
+
+    /** отрисовка дыр на поле и прямоугольников
+    * @param field поле
+    * @param width ширина поля
+    * @param height высота поля
+    * @param symbol символ, обозначающий прямоугольник
+    * @param sizeOfFieldElement длина наименьшего из возможных прямоугольников в пикселях
+    * @param g область рисования
+    * @return true, если прямоугольник, обозначаемый символом symbol есть на поле, иначе false
+    */
+    private boolean drawRectangle(char [][]field, int width, int height, char symbol, int sizeOfFieldElement, Graphics2D g)
     {
         for(int i=1; i<=width; i++)
         {
@@ -83,6 +110,9 @@ class GUIVisImpl implements GUIVis
         if(!isVis)
             return;
         jfrm.setVisible(true);
+        fieldptr[0]= field;
+        widthptr[0]=width;
+        heightptr[0]=height;
         if(isStart)
         {
             contentPane = new JPanel()
@@ -94,20 +124,18 @@ class GUIVisImpl implements GUIVis
                     g2 = (Graphics2D) g;
                     g2.setColor(jfrm.getBackground());
                     g2.fillRect(10, 40, 770, 450);
-                    g2 = (Graphics2D) g;
-                    g2.setColor(Color.black);
-                    int sizeOfFieldElement1 = 770 / width;
-                    int sizeOfFieldElement2 = 450 / height;
+                    int sizeOfFieldElement1 = 770 / widthptr[0];
+                    int sizeOfFieldElement2 = 450 / heightptr[0];
                     int sizeOfFieldElement;
                     if (sizeOfFieldElement1 < sizeOfFieldElement2)
                         sizeOfFieldElement = sizeOfFieldElement1;
                     else
                         sizeOfFieldElement = sizeOfFieldElement2;
                     g2.setColor(Color.white);
-                    g2.fillRect(10, 40, sizeOfFieldElement * width, sizeOfFieldElement * height);
+                    g2.fillRect(10, 40, sizeOfFieldElement * widthptr[0], sizeOfFieldElement * heightptr[0]);
                     g2.setColor(Color.black);
-                    g2.drawRect(10, 40, sizeOfFieldElement * width, sizeOfFieldElement * height);
-                    for (char symbol = '#'; drawRectangle(field, width, height, symbol, sizeOfFieldElement, g2); symbol++);
+                    g2.drawRect(10, 40, sizeOfFieldElement * widthptr[0], sizeOfFieldElement * heightptr[0]);
+                    for (char symbol = '#'; drawRectangle(fieldptr[0], widthptr[0], heightptr[0], symbol, sizeOfFieldElement, g2); symbol++);
                 }
             };
         }
@@ -129,15 +157,12 @@ class GUIVisImpl implements GUIVis
         if(jcb.isSelected())
             isVis=false;
     }
-    /*JLabel jlab = new JLabel("Заполнение наименьшим количеством прямоугольников: ");
-    jlab.setFont(new Font("Arial", Font.PLAIN, 20));
-    jlab.setLocation(000, 000);
-    jlab.setSize(550, 30);
-    jlab.setVisible(false);
-    jfrm.add(jlab);*/
     public void resultVis(char[][] field, int width, int height)
     {
         jfrm.setVisible(true);
+        fieldptr[0]= field;
+        widthptr[0]=width;
+        heightptr[0]=height;
         if(isStart)
         {
             contentPane = new JPanel()
@@ -147,22 +172,20 @@ class GUIVisImpl implements GUIVis
                 {
                     super.paintComponent(g);
                     g2 = (Graphics2D) g;
-                    g2 = (Graphics2D) g;
                     g2.setColor(jfrm.getBackground());
                     g2.fillRect(10, 40, 770, 450);
-                    g2.setColor(Color.black);
-                    int sizeOfFieldElement1 = 770 / width;
-                    int sizeOfFieldElement2 = 450 / height;
+                    int sizeOfFieldElement1 = 770 / widthptr[0];
+                    int sizeOfFieldElement2 = 450 / heightptr[0];
                     int sizeOfFieldElement;
                     if (sizeOfFieldElement1 < sizeOfFieldElement2)
                         sizeOfFieldElement = sizeOfFieldElement1;
                     else
                         sizeOfFieldElement = sizeOfFieldElement2;
                     g2.setColor(Color.white);
-                    g2.fillRect(10, 40, sizeOfFieldElement * width, sizeOfFieldElement * height);
+                    g2.fillRect(10, 40, sizeOfFieldElement * widthptr[0], sizeOfFieldElement * heightptr[0]);
                     g2.setColor(Color.black);
-                    g2.drawRect(10, 40, sizeOfFieldElement * width, sizeOfFieldElement * height);
-                    for (char symbol = '#'; drawRectangle(field, width, height, symbol, sizeOfFieldElement, g2); symbol++);
+                    g2.drawRect(10, 40, sizeOfFieldElement * widthptr[0], sizeOfFieldElement * heightptr[0]);
+                    for (char symbol = '#'; drawRectangle(fieldptr[0], widthptr[0], heightptr[0], symbol, sizeOfFieldElement, g2); symbol++);
                 }
             };
         }
@@ -177,7 +200,7 @@ class GUIVisImpl implements GUIVis
         JButton continueButton = new JButton("Продолжить");
         jbtn.setVisible(false);
         continueButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 nextStep[0] = true;
             }
         });
@@ -187,9 +210,23 @@ class GUIVisImpl implements GUIVis
         jcb.setVisible(false);
         isStart=false;
         while(!nextStep[0]);
+        isVis=true;
+        jfrm.setVisible(false);
+        jlab.setVisible(false);
+        continueButton.setVisible(false);
+        jbtn.setVisible(true);
+        jcb.setVisible(true);
     }
     public void resultVis(char[][] field, int width, int height, double time, String unit)
     {
+        String str="Время работы алгоритма: "+time+" "+unit;
+        JLabel jlab = new JLabel(str);
+        jlab.setFont(new Font("Arial", Font.PLAIN, 15));
+        jlab.setLocation(360, 500);
+        jlab.setSize(300, 20);
+        jfrm.add(jlab);
+        resultVis(field, width, height);
+        jlab.setVisible(false);
     }
 }
 
