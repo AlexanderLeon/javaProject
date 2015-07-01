@@ -29,15 +29,15 @@ class GUIVisTesting
             field1[i][4]='#';
         }
         field1[3][3]='#';
-        //gui.middleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[1][1]='$';
         field1[2][1]='$';
         field1[3][1]='$';
-        //gui.middleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[1][2]='%';
-        //gui.middleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[3][1]=0;
-        //gui.middleVis(field1, width1, height1);
+        gui.middleVis(field1, width1, height1);
         field1[3][2]=39;
         field1[1][3]='&';
         field1[2][3]='&';
@@ -61,15 +61,15 @@ class GUIVisTesting
         field2[2][3]='#';
         field2[3][3]='#';
         field2[3][2]='#';
-        //gui.middleVis(field2, width2, height2);
+        gui.middleVis(field2, width2, height2);
         field2[1][1]='$';
         field2[2][1]='$';
         field2[3][1]='$';
-        //gui.middleVis(field2, width2, height2);
+        gui.middleVis(field2, width2, height2);
         field2[1][2]='%';
-        //gui.middleVis(field2, width2, height2);
+        gui.middleVis(field2, width2, height2);
         field2[3][1]=0;
-        //gui.middleVis(field2, width2, height2);
+        gui.middleVis(field2, width2, height2);
         field2[3][2]=39;
         gui.resultVis(field2, width2, height2);
     }
