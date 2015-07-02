@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by Александр on 29.06.2015.
+ * @author Alexander 29.06.2015.
  */
 class Coordinates
 {

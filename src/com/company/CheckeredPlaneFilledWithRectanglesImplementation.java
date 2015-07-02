@@ -1,12 +1,9 @@
 package com.company;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
 /**
- * Created by Александр on 29.06.2015.
+ * @author Alexander 29.06.2015.
  */
+
 public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredPlane implements CheckeredPlaneFilledWithRectangles
 {
 	public char [][] getLab()

@@ -1,6 +1,7 @@
 package com.company;
 
 /**
+ * @author Alexander 29.06.2015.
  * just a plane with simple functions
  */
 public class CheckeredPlane
