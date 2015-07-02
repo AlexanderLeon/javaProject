@@ -1,10 +1,6 @@
 package com.company;
 
-import javax.sql.rowset.serial.SerialRef;
 import java.io.*;
-import java.net.SocketException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Scanner;
 
 public class Main
@@ -33,7 +29,7 @@ public class Main
 					System.out.println("Неверный номер действия");
 			}
 		}
-		FillingWithRectanglesAlgorithm a = new FillingWithRectanglesAlgorithm();
+		FillingWithRectanglesAlgorithm a = new FillingWithRectanglesAlgorithmImplementation();
 
 		a.starter(gui, isGUIVis);
 
