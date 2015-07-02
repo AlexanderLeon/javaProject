@@ -22,4 +22,8 @@ interface CheckeredPlaneFilledWithRectangles
 	int getThePlaneWidth();
 	char [][] getLab();
 	void setLab(char [][] l);
+	int getWidth();
+	void setWidth(int x);
+	int getHeight();
+	void setHeight(int x);
 }

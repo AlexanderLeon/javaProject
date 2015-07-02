@@ -12,28 +12,33 @@ public class FillingWithRectanglesAlgorithm
 	int rectangleCounter = -1, minRectangleCount = Integer.MAX_VALUE, rightBorder = -1, bottomBorder = -1;
 	char filling = '$';
 
-	void startAlgorithm(FileInputStream in)
+	void startAlgorithm(FileInputStream in, GUIVis gui, boolean isGUIVis)
 	{
-		starter();//(in);
+		starter(gui, isGUIVis);//(in);
 	}
 
-	boolean starter()//(FileInputStream in)
+	boolean starter(GUIVis gui, boolean isGUIVis)//(FileInputStream in)
 	{
 		final CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
 
 		Coordinates fillingStartPoint = new Coordinates(0, 0);
 
-		if (lab.checkTheBorders()) { System.out.println("OMG!!!!111 Check the borders!"); return true; };
+		//if (lab.checkTheBorders()) { System.out.println("OMG!!!!111 Check the borders!"); return true; };
 
 		//int startTime = clock();
 
-		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);
+		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint, gui, isGUIVis);
 
 		//int endTime = clock();
 		//int algorithmTime = endTime - startTime;
 
-		System.out.println("The optimal path is: ");
-		visualization(lab);
+		if(isGUIVis)
+			gui.resultVis(lab.getLab(), lab.getWidth() - 2, lab.getHeight() - 2);
+		else
+		{
+			System.out.println("The optimal path is: ");
+			visualization(lab);
+		}
 		//outfile << "The optimal path is: " << endl;
 		//optSol.showTheOptimalSolution();
 		//optSol.outfileTheOptimalSolution(outfile);
@@ -45,9 +50,12 @@ public class FillingWithRectanglesAlgorithm
 		return true;
 	}
 
-	boolean checkeredPlaneSolve(int x, int y, CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)//, ofstream &outfile)
+	boolean checkeredPlaneSolve(int x, int y, CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint, GUIVis gui, boolean isGUIVis)//, ofstream &outfile)
 	{
-		visualization(lab);
+		if(isGUIVis)
+			gui.middleVis(lab.getLab(), lab.getWidth()-2, lab.getHeight()-2);
+		else
+			visualization(lab);
 
 		for (int i = fillingStartPoint.x; i < bottomBorder; i++)//filling the plane
 			for (int j = fillingStartPoint.y; j < rightBorder; j++)
@@ -72,12 +80,12 @@ public class FillingWithRectanglesAlgorithm
 
 		//if (!MVG) minRectangleCount = Integer.MAX_VALUE;
 
-		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint))
+		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheRight(lab, fillingStartPoint, gui, isGUIVis))
 		{
 			return true;
 		}
 
-		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint))
+		if (!solved(lab) && (rectangleCounter < minRectangleCount) && fillToTheBottom(lab, fillingStartPoint, gui, isGUIVis))
 		{
 			return true;
 		}
@@ -92,7 +100,10 @@ public class FillingWithRectanglesAlgorithm
 			}
 		}
 
-		visualization(lab);
+		if(isGUIVis)
+			gui.middleVis(lab.getLab(), lab.getWidth()-2, lab.getHeight()-2);
+		else
+			visualization(lab);
 
 		filling--;
 		rectangleCounter--;
@@ -100,17 +111,17 @@ public class FillingWithRectanglesAlgorithm
 		return true;
 	}
 
-	boolean fillToTheRight(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
+	boolean fillToTheRight(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint, GUIVis gui, boolean isGUIVis)
 	{
 		getTheCurrentBottomBorderPosition(lab, fillingStartPoint, getTheRightBorderPosition(lab, fillingStartPoint));
-		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);//fill to the right
+		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint, gui, isGUIVis);//fill to the right
 		return true;
 	}
 
-	boolean fillToTheBottom(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint)
+	boolean fillToTheBottom(CheckeredPlaneFilledWithRectangles lab, Coordinates fillingStartPoint, GUIVis gui, boolean isGUIVis)
 	{
 		getTheCurrentRightBorderPosition(lab, fillingStartPoint, getTheBottomBorderPosition(lab, fillingStartPoint));
-		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint);//fill to the bottom
+		checkeredPlaneSolve(lab.getTheStartPoint().x, lab.getTheStartPoint().y, lab, fillingStartPoint, gui, isGUIVis);//fill to the bottom
 		return true;
 	}
 

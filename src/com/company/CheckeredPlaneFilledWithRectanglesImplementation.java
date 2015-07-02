@@ -17,8 +17,23 @@ public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredP
 	{
 		lab=l;
 	}
+	public int getWidth()
+	{
+		return labWidth;
+	}
+	public void setWidth(int x)
+	{
+		labWidth=x;
+	}
+	public int getHeight()
+	{
+		return labHeight;
+	}
+	public void setHeight(int x)
+	{
+		labHeight=x;
+	}
 	public Coordinates startPoint = new Coordinates(0,0);
-
 	public boolean checkTheBorders()
 	{
 		for (int i = 0; i < labHeight; i++)
