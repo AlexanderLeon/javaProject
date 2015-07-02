@@ -34,6 +34,14 @@ public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredP
 		labHeight=x;
 	}
 	public Coordinates startPoint = new Coordinates(0,0);
+	public CheckeredPlaneFilledWithRectangles clone()
+	{
+		CheckeredPlaneFilledWithRectanglesImplementation buf = new CheckeredPlaneFilledWithRectanglesImplementation ();
+		buf.lab = this.lab;
+		buf.labHeight = this.labHeight;
+		buf.labWidth = this.labWidth;
+		return (CheckeredPlaneFilledWithRectangles)buf;
+	}
 	public boolean checkTheBorders()
 	{
 		for (int i = 0; i < labHeight; i++)
@@ -57,7 +65,7 @@ public class CheckeredPlaneFilledWithRectanglesImplementation extends CheckeredP
 
 	public char checkTheCell(int x, int y)
 	{
-		return this.lab[x][y];
+		return this.lab[y][x];
 	}
 
 	public Coordinates getTheStartPoint()

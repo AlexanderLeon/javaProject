@@ -7,7 +7,7 @@ package com.company;
 interface CheckeredPlaneFilledWithRectangles
 {
 	char Wall = '#', Free = ' ';
-
+	public CheckeredPlaneFilledWithRectangles clone();
 	boolean checkTheBorders();
 
 	void setTheCell(int x, int y, char inputSymbol);

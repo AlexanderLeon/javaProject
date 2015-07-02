@@ -25,17 +25,17 @@ public class CheckeredPlane
 	}
 
 	CheckeredPlane()
-{
-	GUIVis gui=new GUIVisImpl();
-	lab=gui.input();
-	if(lab==null)
-		return;
-	labHeight=labWidth=0;
-	while(lab[labWidth][0]!=0)
-		labWidth++;
-	while(lab[0][labHeight]!=0)
-		labHeight++;
-}
+	{
+		GUIVis gui=new GUIVisImpl();
+		lab=gui.input();
+		if(lab==null)
+			return;
+		labHeight=labWidth=0;
+		while(lab[labWidth][0]!=0)
+			labWidth++;
+		while(lab[0][labHeight]!=0)
+			labHeight++;
+	}
 
 	public void outfileThePlane()
 	{
@@ -51,7 +51,7 @@ public class CheckeredPlane
 
 	public void setTheCell(int x, int y, char inputSymbol)
 	{
-		this.lab[x][y] = inputSymbol;
+		this.lab[y][x] = inputSymbol;
 	}
 
 	public int getThePlaneHeight()

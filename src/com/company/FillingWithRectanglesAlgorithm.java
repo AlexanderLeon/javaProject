@@ -19,7 +19,7 @@ public class FillingWithRectanglesAlgorithm
 
 	boolean starter(GUIVis gui, boolean isGUIVis)//(FileInputStream in)
 	{
-		final CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
+		CheckeredPlaneFilledWithRectangles lab = new CheckeredPlaneFilledWithRectanglesImplementation();
 
 		Coordinates fillingStartPoint = new Coordinates(0, 0);
 
