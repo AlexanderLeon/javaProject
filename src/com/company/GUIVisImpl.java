@@ -41,6 +41,8 @@ class GUIVisImpl implements GUIVis
     */
     private boolean drawRectangle(char [][]field, int width, int height, char symbol, int sizeOfFieldElement, Graphics2D g)
     {
+        if(symbol=='$')
+            return true;
         for(int i=1; i<=width; i++)
         {
             for(int j=1; j<=height; j++)
