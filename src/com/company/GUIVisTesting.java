@@ -21,7 +21,7 @@ class GUIVisTesting
         final int width1=3, height1=3;
         for(int i=0;i<5;i++)
         {
-            field1[i][0]='#';
+            field1[0][0]='#';
             field1[4][i]='#';
             field1[0][i]='#';
             field1[i][4]='#';

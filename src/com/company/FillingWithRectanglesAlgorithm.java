@@ -203,7 +203,7 @@ public class FillingWithRectanglesAlgorithm
 		{
 			for (int j = 0; j < lab.getThePlaneWidth(); j++)
 			{
-				System.out.print(lab.checkTheCell(i, j));
+				System.out.print(lab.checkTheCell(j, i));
 			}
 			System.out.println("");
 		}
